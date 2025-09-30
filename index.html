@@ -86,7 +86,7 @@
   <script>
     const btn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
-    const servicos-btn = document.getElementById('servicos-btn');
+    const servicosBtn = document.getElementById('servicos-btn');
     const submenu = document.getElementById('submenu');
     const arrow = document.getElementById('arrow');
 
@@ -116,10 +116,10 @@
     });
 
     // Toggle submenu no mobile
-    servicos-btn.addEventListener('click', (e) => {
+    servicosBtn.addEventListener('click', (e) => {
       if (window.innerWidth < 640) {
         e.preventDefault();
-    submenu.classList.remove('hidden'); // garante que está visível
+    submenu.classList.toggle('hidden'); // garante que está visível
     submenu.classList.toggle('submenu-open'); // abre/fecha suavemente
     arrow.classList.toggle('rotate-180');
       }
