@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Aula10</title>
+  <style>
+    /* Animação fade + slide */
+    .fade-slide-enter {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    .fade-slide-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+    .fade-slide-exit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-slide-exit-active {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="bg-blue-100 min-h-screen">
+
+  <header class="bg-blue-100 shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="flex justify-between items-center h-16">
+
+        <!-- Logo -->
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          MeuSite
+        </h1>
+
+        <!-- Botão Mobile -->
+        <button id="menu-btn" class="sm:hidden text-gray-600 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+        <!-- Menu -->
+        <nav id="menu" class="hidden sm:flex flex-col sm:flex-row sm:space-x-4 absolute sm:static top-16 left-0 w-full sm:w-auto bg-blue-100 sm:bg-transparent shadow sm:shadow-none">
+          <a href="#" class="px-4 py-2 text-white bg-blue-800 hover:bg-blue-600 rounded-full">Home</a>
+
+          <!-- Dropdown Serviços -->
+          <div class="relative group w-full sm:w-auto">
+            <button id="servicos-btn" class="w-full sm:w-auto flex justify-between items-center px-4 py-2 text-white bg-blue-800 hover:bg-blue-600 rounded-full">
+              Serviços
+              <svg id="arrow" class="ml-2 w-4 h-4 transform transition-transform duration-300 delay-200 group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"/>
+              </svg>
+            </button>
+
+            <!-- Submenu -->
+            <div id="submenu" class="hidden sm:absolute sm:top-full sm:left-0 sm:w-40 w-full relative bg-blue-800 rounded-lg shadow text-white mt-0.5 sm:block group-hover:block">
+            <a href="#" class="block px-3 py-1 text-white hover:bg-blue-500 rounded-md">Serviço X</a>
+            <a href="#" class="block px-3 py-1 text-white hover:bg-blue-500 rounded-md">Serviço Y</a>
+            <a href="#" class="block px-3 py-1 text-white hover:bg-blue-500 rounded-md">Serviço Z</a>
+            </div>
+
+          </div>
+
+          <a href="#" class="px-4 py-2 text-white bg-blue-800 hover:bg-blue-600 rounded-full">Sobre</a>
+          <a href="#" class="px-4 py-2 text-white bg-blue-800 hover:bg-blue-600 rounded-full">Contato</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+    const servicosBtn = document.getElementById('servicos-btn');
+    const submenu = document.getElementById('submenu');
+    const arrow = document.getElementById('arrow');
+
+    // Função para animar entrada/saída
+    function toggleFade(el) {
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        el.classList.add('fade-slide-enter');
+        requestAnimationFrame(() => {
+          el.classList.add('fade-slide-enter-active');
+          el.classList.remove('fade-slide-enter');
+        });
+     } else {
+        el.classList.add('fade-slide-exit');
+        el.classList.add('fade-slide-exit-active');
+        el.classList.remove('fade-slide-enter-active');
+        el.addEventListener('transitionend', () => {
+          el.classList.add('hidden');
+          el.classList.remove('fade-slide-exit', 'fade-slide-exit-active');
+        }, { once: true });
+      }
+    }
+
+    // Toggle menu mobile
+    btn.addEventListener('click', () => {
+      toggleFade(menu);
+    });
+
+    // Toggle submenu no mobile
+    servicosBtn.addEventListener('click', (e) => {
+      if (window.innerWidth < 640) 
+        e.preventDefault();
+        toggleFade(submenu);
+        arrow.classList.toggle('rotate-180');
+      }
+    );
+  </script>
+</body>
+</html>
