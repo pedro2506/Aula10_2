@@ -83,14 +83,15 @@
     </div>
   </header>
 
-  <script>
+   <script>
+    // Menu mobile
     const btn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
     const servicosBtn = document.getElementById('servicos-btn');
     const submenu = document.getElementById('submenu');
     const arrow = document.getElementById('arrow');
 
-    // Função para animar entrada/saída
+    // Função fade + slide
     function toggleFade(el) {
       if (el.classList.contains('hidden')) {
         el.classList.remove('hidden');
@@ -99,7 +100,7 @@
           el.classList.add('fade-slide-enter-active');
           el.classList.remove('fade-slide-enter');
         });
-     } else {
+      } else {
         el.classList.add('fade-slide-exit');
         el.classList.add('fade-slide-exit-active');
         el.classList.remove('fade-slide-enter-active');
@@ -115,15 +116,24 @@
       toggleFade(menu);
     });
 
-    // Toggle submenu no mobile
-    servicosBtn.addEventListener('click', (e) => {
-      if (window.innerWidth < 640) {
-        e.preventDefault();
-    submenu.classList.toggle('hidden'); // garante que está visível
-    submenu.classList.toggle('submenu-open'); // abre/fecha suavemente
-    arrow.classList.toggle('rotate-180');
-      }
-   } );
+    // Toggle submenu mobile
+    servicosBtn.addEventListener('click', () => {
+      submenu.classList.toggle('hidden');
+      arrow.classList.toggle('rotate-180');
+    });
+
+    // Desktop submenu (opcional: seta gira no hover)
+    const servicosBtnDesktop = document.getElementById('servicos-btn-desktop');
+    const arrowDesktop = document.getElementById('arrow-desktop');
+    const submenuDesktop = document.getElementById('submenu-desktop');
+
+    servicosBtnDesktop.addEventListener('mouseenter', () => {
+      arrowDesktop.classList.add('rotate-180');
+    });
+    servicosBtnDesktop.addEventListener('mouseleave', () => {
+      arrowDesktop.classList.remove('rotate-180');
+    });
   </script>
+
 </body>
 </html>
