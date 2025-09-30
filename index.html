@@ -46,8 +46,8 @@
         </button>
 
         <!-- Menu -->
-        <nav id="menu" class="hidden sm:flex flex-col sm:flex-row sm:space-x-4 absolute sm:static top-16 left-0 w-full sm:w-auto bg-blue-100 sm:bg-transparent shadow sm:shadow-none">
-          <a href="#" class="px-4 py-2 text-white bg-blue-800 hover:bg-blue-600 rounded-full">Home</a>
+        <nav id="menu" class="hidden sm:flex flex-col sm:flex-row sm:space-x-4 absolute sm:static top-16 left-0 w-auto sm:w-auto bg-blue-100 sm:bg-transparent shadow sm:shadow-none">
+          <a href="#" class="px-4 py-2 text-white bg-blue-800 hover:bg-blue-600 rounded-full w-auto">Home</a>
 
           <!-- Dropdown Serviços -->
           <div class="relative group w-full sm:w-auto">
@@ -108,12 +108,12 @@
 
     // Toggle submenu no mobile
     servicosBtn.addEventListener('click', (e) => {
-      if (window.innerWidth < 640) 
+      if (window.innerWidth < 640) {
         e.preventDefault();
         toggleFade(submenu);
         arrow.classList.toggle('rotate-180');
       }
-    );
+    });
   </script>
 </body>
 </html>
